@@ -7,12 +7,9 @@ extern crate lazy_static;
 
 use glob::glob;
 
-/// Directory containing example files for testing.
-const DIR: &str = "tests/";
-
 lazy_static! {
     /// Glob all example files in the `tests/` directory.
-    static ref TEST_FILES: Vec<String> = glob(&format!("{}*.java", DIR))
+    static ref TEST_FILES: Vec<String> = glob("tests/*.java")
         .expect("Failed to read glob pattern")
         .into_iter()
         .map(|res| res.unwrap().to_str().unwrap().to_string())
@@ -44,8 +41,8 @@ fn test_glob_runner() {
             for fname1 in $d.iter() {
                 for fname2 in $d.iter() {
                     // Remove directory and extension from `fname1`, `fname2`.
-                    let name1 = fname1.get(DIR.len()..).unwrap().split(".").collect::<Vec<&str>>()[0];
-                    let name2 = fname2.get(DIR.len()..).unwrap().split(".").collect::<Vec<&str>>()[0];
+                    let name1 = fname1.get(6..).unwrap().split(".").collect::<Vec<&str>>()[0];
+                    let name2 = fname2.get(6..).unwrap().split(".").collect::<Vec<&str>>()[0];
                     || { define_tests!(name1, name2, fname1, fname2) };
                 }
             }
