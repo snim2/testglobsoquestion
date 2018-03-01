@@ -26,8 +26,8 @@ fn test_glob_runner() {
             for fname1 in $d.iter() {
                 for fname2 in $d.iter() {
                     // Remove directory and extension from `fname1`, `fname2`.
-                    let name1 = fname1.get(6..).unwrap().split(".").collect::<Vec<&str>>()[0];
-                    let name2 = fname2.get(6..).unwrap().split(".").collect::<Vec<&str>>()[0];
+                    let name1 = &fname1[6..].split(".").next().unwrap();
+                    let name2 = &fname1[6..].split(".").next().unwrap();
                     || { define_tests!(name1, name2, fname1, fname2) };
                 }
             }
