@@ -1,21 +1,6 @@
 #![feature(plugin)]
 #![plugin(interpolate_idents)]
 
-extern crate glob;
-#[macro_use]
-extern crate lazy_static;
-
-use glob::glob;
-
-lazy_static! {
-    /// Glob all example files in the `tests/` directory.
-    static ref TEST_FILES: Vec<String> = glob("tests/*.java")
-        .expect("Failed to read glob pattern")
-        .into_iter()
-        .map(|res| res.unwrap().to_str().unwrap().to_string())
-        .collect::<Vec<String>>();
-}
-
 fn check_files(path1: &str, path2: &str, msg: &str) {
     assert!(true, "FAILURE: {}: {} and {}.", msg, path1, path2);
 }
@@ -49,5 +34,5 @@ fn test_glob_runner() {
         }
     }
     // Test all pairs of files in the `tests/` directory.
-    test_globbed_files!(TEST_FILES);
+    test_globbed_files!(vec!["tests/Empty.java", "tests/Hello.java"]);
 }
