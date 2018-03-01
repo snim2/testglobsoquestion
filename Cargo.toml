@@ -1,0 +1,9 @@
+[package]
+name = "globtestsoquestion"
+version = "0.1.0"
+authors = ["Sarah Mount <sarah.mount@kcl.ac.uk>"]
+
+[dependencies]
+glob = "0.2.11"
+interpolate_idents = "0.2.2"
+lazy_static = "1.0"
